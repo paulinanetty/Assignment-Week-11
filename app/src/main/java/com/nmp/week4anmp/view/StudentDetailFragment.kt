@@ -15,7 +15,6 @@ import com.nmp.week4anmp.viewmodel.DetailViewModel
 
 
 class StudentDetailFragment : Fragment() {
-    private lateinit var viewModel: DetailViewModel
     private lateinit var binding: FragmentStudentDetailBinding
 
     override fun onCreateView(
@@ -27,21 +26,8 @@ class StudentDetailFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-
-        viewModel.fetch()
-
-        viewModel()
-    }
-    fun viewModel(){
-        viewModel.studentLD.observe(viewLifecycleOwner, Observer {
-
-        })
-    }
 
 
 
 }
-

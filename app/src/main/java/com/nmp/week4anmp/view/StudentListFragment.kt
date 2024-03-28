@@ -38,7 +38,15 @@ class StudentListFragment : Fragment() {
         binding.recyclerView.adapter = studentListAdapter
 
         observeViewModel()
-    }
+
+        binding.refreshLayout.setOnRefreshListener {
+            binding.recyclerView.visibility = View.GONE
+            binding.txterror.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
+            viewModel.refresh()
+            binding.refreshLayout.isRefreshing = false
+        }
+        }
 
     fun observeViewModel() {
         viewModel.studentsLD.observe(viewLifecycleOwner, Observer {
