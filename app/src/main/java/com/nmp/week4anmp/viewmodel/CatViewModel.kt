@@ -26,7 +26,7 @@ class CatViewModel(application: Application): AndroidViewModel(application) {
         catsLoadErrorLD.value = false
 
         queue = Volley.newRequestQueue(getApplication())
-        val url = "http://10.12.200.45/anmpexercise/cats.json"
+        val url = "http://adv.jitusolution.com/cats.json"
 
 
         val stringRequest = StringRequest(
