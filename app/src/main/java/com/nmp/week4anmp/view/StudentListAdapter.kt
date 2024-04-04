@@ -1,11 +1,15 @@
 package com.nmp.week4anmp.view
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.nmp.week4anmp.databinding.StudentListItemBinding
 import com.nmp.week4anmp.model.Student
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 
 class StudentListAdapter(val studentList:ArrayList<Student>)
     :RecyclerView.Adapter<StudentListAdapter.StudentViewHolder>() {
@@ -28,9 +32,28 @@ class StudentListAdapter(val studentList:ArrayList<Student>)
         holder.binding.txtname.text = studentList[position].name
 
         holder.binding.btndetail.setOnClickListener {
-            val action = StudentListFragmentDirections.actionStudentDetail()
+            val action = StudentListFragmentDirections.actionStudentDetail(studentId = "")
             Navigation.findNavController(it).navigate(action)
         }
+
+        val picasso = Picasso.Builder(holder.itemView.context)
+        picasso.listener { picasso, uri, exception ->
+            exception.printStackTrace()
+        }
+        picasso.build().load(studentList[position].photoUrl)
+            .into(holder.binding.imageView3, object: Callback {
+                override fun onSuccess() {
+                    holder.binding.progressBar2.visibility = View.INVISIBLE
+                    holder.binding.imageView3.visibility = View.VISIBLE
+                }
+
+                override fun onError(e: Exception?) {
+                    Log.e("picasso_error", e.toString())
+                }
+
+
+            })
+
 
     }
 
